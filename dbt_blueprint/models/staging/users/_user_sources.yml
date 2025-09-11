@@ -1,0 +1,18 @@
+version: 2
+
+sources: 
+  - name: users
+    tags: ["users"]
+    catalog: ingestion
+    schema: dbt_blueprint_dummy_ingestion
+    tables:
+      - name: users_events
+        description: "Table containing user event data"
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
+        columns:
+          - name: userId
+            datatests:
+              - not_null
+              - unique

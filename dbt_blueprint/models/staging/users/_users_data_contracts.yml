@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_user_events
+    meta:
+      owner: "User Team"
+      contact_person: "Lars Mikkelson"
+      contact_email: "lars.mikkelson@email.com"
+    description: "{{ doc('user_events_table_description') }}"
+    
+    columns:
+      - name: user_id
+        description: "{{ doc('user_id') }}"
+      - name: phone_number
+        description: "{{ doc('phone_number') }}"
+      - name: first_name
+        description: "{{ doc('first_name') }}"
+      - name: last_name
+        description: "{{ doc('last_name') }}"
+      - name: address
+        description: "{{ doc('address') }}"
+      - name: country_code
+        description: "{{ doc('country_code') }}"
+      - name: status
+        description: "{{ doc('status') }}"
+      - name: event_time
+        description: "{{ doc('event_time') }}"
+      - name: recorded_time
+        description: "{{ doc('recorded_time') }}"

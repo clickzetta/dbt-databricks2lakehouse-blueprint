@@ -1,0 +1,50 @@
+# Workflow to validate dbt changes
+  
+name: PR dbt Build and Test
+
+on:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+env:
+  # Map your GitHub Secrets to env vars used in profiles.yml
+  DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+  DATABRICKS_HTTP_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
+  DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+  DBT_CATALOG: ${{ secrets.DBT_CATALOG }}
+  #DBT_SCHEMA: dbt_blueprint_ci   # change if you want PR-specific schemas
+  DEFAULT_SCHEMA: PR_${{ github.event.number }}
+  UV_VERSION: 0.8.14
+
+jobs:
+  dbt-pr:
+    name: "dbt PR build and test"
+    runs-on: ubuntu-latest-8-cores-pip
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/${{ env.UV_VERSION }}/install.sh | sh
+
+      - name: Install dependencies
+        run: uv sync --locked 
+
+      - name: dbt debug
+        run: uv run dbt debug
+
+      - name: dbt deps
+        run: uv run dbt deps
+
+      - name: dbt compile
+        run: uv run dbt compile
+
+      - name: dbt run
+        run: uv run dbt run
+
+      - name: dbt test
+        run: uv run dbt test

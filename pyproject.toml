@@ -1,0 +1,13 @@
+[project]
+name = "dbt-blueprint"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "dbt-core>=1.7,<1.9",
+    "dbt-databricks>=1.7,<1.9",
+    "elementary-data>=0.14,<0.16",
+    "sqlfluff>=3,<4",
+    "sqlfluff-templater-dbt>=3,<4",
+]
