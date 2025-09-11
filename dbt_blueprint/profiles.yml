@@ -1,0 +1,21 @@
+connection_databricks:
+  target: dev_local
+  outputs:
+    # dev local profile used for dbt development on local mashie with token access
+    dev_local:
+      type: databricks
+      catalog: dbt_blueprint
+      schema: default
+      host: dbc-a505ff10-0af5.cloud.databricks.com
+      http_path: /sql/1.0/warehouses/4fa4ca06332da87f
+      token: "{{ env_var('BLUEPRINT_DATABRICKS_TOKEN') }}"
+      threads: 1
+
+    prod:
+      type: databricks
+      catalog: dbt_blueprint
+      schema: default
+      host: dbc-a505ff10-0af5.cloud.databricks.com
+      http_path: /sql/1.0/warehouses/4fa4ca06332da87f
+      token: "{{ env_var('BLUEPRINT_DATABRICKS_TOKEN') }}"
+      threads: 1
