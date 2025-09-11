@@ -14,7 +14,6 @@ env:
   DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
   DATABRICKS_HTTP_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
   DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-  DBT_CATALOG: ${{ secrets.DBT_CATALOG }}
   #DBT_SCHEMA: dbt_blueprint_ci   # change if you want PR-specific schemas
   DEFAULT_SCHEMA: PR_${{ github.event.number }}
   UV_VERSION: 0.8.14
