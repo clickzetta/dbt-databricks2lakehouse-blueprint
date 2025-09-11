@@ -21,7 +21,7 @@ env:
 jobs:
   dbt-pr:
     name: "dbt PR build and test"
-    runs-on: ubuntu-latest-8-cores-pip
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
