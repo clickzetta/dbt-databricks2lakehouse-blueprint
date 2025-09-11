@@ -24,6 +24,10 @@ jobs:
     name: "dbt PR build and test"
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./dbt_blueprint
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
