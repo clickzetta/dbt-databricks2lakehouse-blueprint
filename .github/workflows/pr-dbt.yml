@@ -13,7 +13,7 @@ env:
   # Map your GitHub Secrets to env vars used in profiles.yml
   DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
   DATABRICKS_HTTP_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
-  DATABRICKS_TOKEN: ${{ secrets.BLUEPRINT_DATABRICKS_TOKEN }}
+  BLUEPRINT_DATABRICKS_TOKEN: ${{ secrets.BLUEPRINT_DATABRICKS_TOKEN }}
   DBT_TARGET: dev_cloud
   #DBT_SCHEMA: dbt_blueprint_ci   # change if you want PR-specific schemas
   DEFAULT_SCHEMA: PR_${{ github.event.number }}
