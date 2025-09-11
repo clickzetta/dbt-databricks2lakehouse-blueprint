@@ -7,5 +7,6 @@ select
     user_id
     , first_name
     , last_name
+    , recorded_time
 
 from users

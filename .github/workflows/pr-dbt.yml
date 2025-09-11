@@ -13,8 +13,8 @@ env:
   # Map your GitHub Secrets to env vars used in profiles.yml
   DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
   DATABRICKS_HTTP_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
-  DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-  DBT_CATALOG: ${{ secrets.DBT_CATALOG }}
+  BLUEPRINT_DATABRICKS_TOKEN: ${{ secrets.BLUEPRINT_DATABRICKS_TOKEN }}
+  DBT_TARGET: dev_cloud
   #DBT_SCHEMA: dbt_blueprint_ci   # change if you want PR-specific schemas
   DEFAULT_SCHEMA: PR_${{ github.event.number }}
   UV_VERSION: 0.8.14
@@ -22,7 +22,11 @@ env:
 jobs:
   dbt-pr:
     name: "dbt PR build and test"
-    runs-on: ubuntu-latest-8-cores-pip
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./dbt_blueprint
 
     steps:
       - name: Checkout
@@ -35,16 +39,16 @@ jobs:
         run: uv sync --locked 
 
       - name: dbt debug
-        run: uv run dbt debug
+        run: uv run dbt debug --target $DBT_TARGET
 
       - name: dbt deps
-        run: uv run dbt deps
+        run: uv run dbt deps --target $DBT_TARGET
 
       - name: dbt compile
-        run: uv run dbt compile
+        run: uv run dbt compile --target $DBT_TARGET
 
       - name: dbt run
-        run: uv run dbt run
+        run: uv run dbt run --target $DBT_TARGET
 
       - name: dbt test
-        run: uv run dbt test
+        run: uv run dbt test --target $DBT_TARGET
