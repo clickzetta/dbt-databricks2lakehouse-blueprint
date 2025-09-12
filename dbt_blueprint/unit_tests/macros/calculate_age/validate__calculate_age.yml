@@ -1,0 +1,26 @@
+unit_tests:
+  - name: test__calculate_age__valid_ages
+    description: |
+      Test that calculate_age macro returns correct ages for valid birth dates.
+
+    model: validate__calculate_age
+    given:
+      - input: ref('test_source')
+        format: sql
+        rows: |
+          SELECT
+            '2000-01-01' AS date_of_birth,
+            '2025-01-01T00:00:00Z' AS time_of_age
+          UNION ALL
+          SELECT
+            '1990-06-15' AS date_of_birth,
+            '2025-01-01T00:00:00Z' AS time_of_age
+          UNION ALL
+          SELECT
+            '1985-12-31' AS date_of_birth,
+            '2025-01-01T00:00:00Z' AS time_of_age
+    expect:
+      rows:
+        - { calculated_age: 25 }
+        - { calculated_age: 34 }
+        - { calculated_age: 39 }

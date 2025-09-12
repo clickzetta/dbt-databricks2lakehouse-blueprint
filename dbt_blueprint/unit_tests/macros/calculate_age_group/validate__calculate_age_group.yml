@@ -1,0 +1,43 @@
+unit_tests:
+  - name: test__calculate_age_group__valid_age_groups
+    description: |
+      Test that calculate_age_group macro correctly assigns age groups based on user age.
+
+    model: validate__calculate_age_group
+    given:
+      - input: ref('test_source')
+        format: sql
+        rows: |
+          SELECT
+            15 AS user_age
+          UNION ALL
+          SELECT
+            18 AS user_age
+          UNION ALL
+          SELECT
+            22 AS user_age
+          UNION ALL
+          SELECT
+            30 AS user_age
+          UNION ALL
+          SELECT
+            45 AS user_age
+          UNION ALL
+          SELECT
+            60 AS user_age
+          UNION ALL
+          SELECT
+            75 AS user_age
+          UNION ALL
+          SELECT
+            90 AS user_age
+    expect:
+      rows:
+        - { calculated_age_group: '0-18' }
+        - { calculated_age_group: '18-19' }
+        - { calculated_age_group: '20-25' }
+        - { calculated_age_group: '30-34' }
+        - { calculated_age_group: '45-49' }
+        - { calculated_age_group: '60-64' }
+        - { calculated_age_group: '75-79' }
+        - { calculated_age_group: '90+' }

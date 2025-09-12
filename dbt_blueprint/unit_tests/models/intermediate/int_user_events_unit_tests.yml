@@ -1,0 +1,43 @@
+unit_tests:
+  - name: test__int_user_events__scd_logic
+    description: "Test the SCD logic for the user events dimension."
+    model: int_user_events
+    given:
+      - input: ref('stg_user_events')
+        rows:
+          - {user_id: 1, first_name: 'John', last_name: 'Doe', status: 'active', event_time: '2023-01-01 00:00:00', recorded_time: '2023-01-01 01:00:00'}
+          - {user_id: 1, first_name: 'John', last_name: 'Doe', status: 'inactive', event_time: '2023-06-01 00:00:00', recorded_time: '2023-06-01 01:00:00'}
+          - {user_id: 2, first_name: 'Jane', last_name: 'Smith', status: 'active', event_time: '2023-01-01 00:00:00', recorded_time: '2023-01-01 01:00:00'}
+    expect:
+      rows:
+        - {user_id: 1, first_name: 'John', last_name: 'Doe', status: 'active', from_event_timestamp: '2023-01-01 00:00:00', to_event_timestamp: '2023-06-01 00:00:00', recorded_time: '2023-01-01 01:00:00'}
+        - {user_id: 1, first_name: 'John', last_name: 'Doe', status: 'inactive', from_event_timestamp: '2023-06-01 00:00:00', to_event_timestamp: '9999-12-31 23:59:59', recorded_time: '2023-06-01 01:00:00'}
+        - {user_id: 2, first_name: 'Jane', last_name: 'Smith', status: 'active', from_event_timestamp: '2023-01-01 00:00:00', to_event_timestamp: '9999-12-31 23:59:59', recorded_time: '2023-01-01 01:00:00'}
+  
+  
+  - name: test__int_user_events__multiple_status_changes
+    description: "Test multiple status changes for a single user."
+    model: int_user_events
+    given:
+      - input: ref('stg_user_events')
+        rows:
+          - {user_id: 3, first_name: 'Alice', last_name: 'Brown', status: 'active', event_time: '2023-02-01 00:00:00', recorded_time: '2023-02-01 01:00:00'}
+          - {user_id: 3, first_name: 'Alice', last_name: 'Brown', status: 'updated', event_time: '2023-08-01 00:00:00', recorded_time: '2023-08-01 01:00:00'}
+          - {user_id: 3, first_name: 'Alice', last_name: 'Brown', status: 'inactive', event_time: '2024-02-01 00:00:00', recorded_time: '2024-02-01 01:00:00'}
+    expect:
+      rows:
+        - {user_id: 3, first_name: 'Alice', last_name: 'Brown', status: 'active', from_event_timestamp: '2023-02-01 00:00:00', to_event_timestamp: '2023-08-01 00:00:00', recorded_time: '2023-02-01 01:00:00'}
+        - {user_id: 3, first_name: 'Alice', last_name: 'Brown', status: 'updated', from_event_timestamp: '2023-08-01 00:00:00', to_event_timestamp: '2024-02-01 00:00:00', recorded_time: '2023-08-01 01:00:00'}
+        - {user_id: 3, first_name: 'Alice', last_name: 'Brown', status: 'inactive', from_event_timestamp: '2024-02-01 00:00:00', to_event_timestamp: '9999-12-31 23:59:59', recorded_time: '2024-02-01 01:00:00'}
+  
+  
+  - name: test__int_user_events__new_user
+    description: "Test a new user with no prior history."
+    model: int_user_events
+    given:
+      - input: ref('stg_user_events')
+        rows:
+          - {user_id: 4, first_name: 'Bob', last_name: 'White', status: 'active', event_time: '2023-03-01 00:00:00', recorded_time: '2023-03-01 01:00:00'}
+    expect:
+      rows:
+        - {user_id: 4, first_name: 'Bob', last_name: 'White', status: 'active', from_event_timestamp: '2023-03-01 00:00:00', to_event_timestamp: '9999-12-31 23:59:59', recorded_time: '2023-03-01 01:00:00'}
