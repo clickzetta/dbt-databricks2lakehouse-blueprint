@@ -5,13 +5,14 @@ with source_user_events as (
         phoneNumber     :: int         as phone_number,
         firstName       :: string      as first_name,
         lastName        :: string      as last_name,
+        dateOfBirth     :: date        as date_of_birth,
         address         :: string      as address,
         countryCode     :: string      as country_code,
         status          :: string      as status,
         eventTime       :: timestamp   as event_time,
         recordedTime    :: timestamp   as recorded_time
 
-    from {{ source('users', 'users_events') }}    
+    from {{ source('users', 'user_events') }}    
 )
 
 select *

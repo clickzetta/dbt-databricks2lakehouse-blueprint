@@ -14,7 +14,7 @@ connection_databricks:
     dev_cloud:
       type: databricks
       auth_type: oauth
-      catalog: dbt_blueprint
+      catalog: dbt_blueprint_prod
       schema: default
       host: dbc-a505ff10-0af5.cloud.databricks.com
       http_path: /sql/1.0/warehouses/4fa4ca06332da87f

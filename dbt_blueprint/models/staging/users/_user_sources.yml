@@ -6,7 +6,7 @@ sources:
     catalog: ingestion
     schema: dbt_blueprint_dummy_ingestion
     tables:
-      - name: users_events
+      - name: user_events
         description: "Table containing user event data"
         freshness:
           warn_after: {count: 24, period: hour}
