@@ -41,6 +41,6 @@ Current status of the user.
 Timestamp of the event occurrence.
 {% enddocs %}
 
-{% docs recorded_time %}
+{% docs user_recorded_time %}
 Timestamp when the event was recorded.
 {% enddocs %}

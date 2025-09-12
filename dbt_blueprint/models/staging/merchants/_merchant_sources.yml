@@ -1,0 +1,34 @@
+version: 2
+
+sources:
+  - name: merchants
+    tags: ["merchants"]
+    catalog: ingestion
+    schema: dbt_blueprint_dummy_ingestion
+    tables:
+      - name: merchants_dk_no
+        description: "Table containing merchant data"
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
+        columns:
+          - name: merchantId
+            datatests:
+              - not_null
+              - unique
+
+  - name: industry_codes
+    tags: ["industry_codes"]
+    catalog: ingestion
+    schema: dbt_blueprint_dummy_ingestion
+    tables:
+      - name: industry_codes
+        description: "Table containing industry codes data"
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
+        columns:
+          - name: orgNo
+            datatests:
+              - not_null
+              - unique

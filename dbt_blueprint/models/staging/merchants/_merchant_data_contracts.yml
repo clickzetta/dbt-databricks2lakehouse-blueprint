@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: stg_merchants
+    description: "{{ doc('merchants_table_description') }}"
+    columns:
+      - name: merchant_id
+        description: "{{ doc('merchant_id') }}"
+      - name: organization_number
+        description: "{{ doc('organization_number') }}"
+      - name: merchant_name
+        description: "{{ doc('merchant_name') }}"
+      - name: country_code
+        description: "{{ doc('merchant_country_code') }}"
+      - name: status_type
+        description: "{{ doc('status_type') }}"
+      - name: created_time
+        description: "{{ doc('created_time') }}"
+      - name: updated_time
+        description: "{{ doc('updated_time') }}"
+      - name: recorded_time
+        description: "{{ doc('merchant_recorded_time') }}"
+
+  - name: stg_industry_codes
+    description: >
+      This model transforms the raw `industry_codes` source table into a standardized format 
+      with renamed and casted columns for better usability in downstream models.
+    columns:
+      - name: organization_number
+        description: "{{ doc('organization_number') }}"
+      - name: industry_code
+        description: "{{ doc('industry_code') }}"
+      - name: country_code
+        description: "{{ doc('industry_country_code') }}"
+      - name: industry_name
+        description: "{{ doc('industry_name') }}"

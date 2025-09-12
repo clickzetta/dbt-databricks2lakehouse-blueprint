@@ -26,4 +26,4 @@ models:
       - name: event_time
         description: "{{ doc('event_time') }}"
       - name: recorded_time
-        description: "{{ doc('recorded_time') }}"
+        description: "{{ doc('user_recorded_time') }}"
