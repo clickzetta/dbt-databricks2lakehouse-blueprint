@@ -1,6 +1,6 @@
 -- Macro to create age group buckets of users for anayltics
 
-{% macro get_age_group(user_age) -%}
+{% macro calculate_age_group(user_age) -%}
   CASE
     WHEN {{ user_age }} < 18 THEN '0-18'
     WHEN {{ user_age }} BETWEEN 18 AND 19 THEN '18-19'
