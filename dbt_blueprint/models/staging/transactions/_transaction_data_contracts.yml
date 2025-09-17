@@ -1,0 +1,134 @@
+version: 2
+
+models:
+  - name: stg_p2b_captured
+    meta:
+      owner: "Transactions Team"
+      contact_person: "Jane Doe"
+      contact_email: "jane.doe@email.com"
+    description: "{{ doc('p2b_captured_table_description') }}"
+    
+    columns:
+      - name: transaction_event_id
+        description: "{{ doc('transaction_event_id') }}"
+      - name: transaction_sender_user_id
+        description: "{{ doc('transaction_sender_user_id') }}"
+      - name: transaction_receiver_user_id
+        description: "{{ doc('transaction_receiver_user_id') }}"
+      - name: transaction_merchant_id
+        description: "{{ doc('transaction_merchant_id') }}"
+      - name: transaction_sender_payment_source_id
+        description: "{{ doc('transaction_sender_payment_source_id') }}"
+      - name: transaction_receiver_payment_source_id
+        description: "{{ doc('transaction_receiver_payment_source_id') }}"
+      - name: transaction_country_code
+        description: "{{ doc('transaction_country_code') }}"
+      - name: transaction_currency_code
+        description: "{{ doc('transaction_currency_code') }}"
+      - name: transaction_transaction_amount
+        description: "{{ doc('transaction_transaction_amount') }}"
+      - name: transaction_message
+        description: "{{ doc('transaction_message') }}"
+      - name: transaction_event_time
+        description: "{{ doc('transaction_event_time') }}"
+      - name: transaction_recorded_time
+        description: "{{ doc('transaction_recorded_time') }}"
+
+  - name: stg_p2b_failed
+    meta:
+      owner: "Transactions Team"
+      contact_person: "Jane Doe"
+      contact_email: "jane.doe@email.com"
+    description: "{{ doc('p2b_failed_table_description') }}"
+    
+    columns:
+      - name: transaction_event_id
+        description: "{{ doc('transaction_event_id') }}"
+      - name: transaction_sender_user_id
+        description: "{{ doc('transaction_sender_user_id') }}"
+      - name: transaction_receiver_user_id
+        description: "{{ doc('transaction_receiver_user_id') }}"
+      - name: transaction_merchant_id
+        description: "{{ doc('transaction_merchant_id') }}"
+      - name: transaction_sender_payment_source_id
+        description: "{{ doc('transaction_sender_payment_source_id') }}"
+      - name: transaction_receiver_payment_source_id
+        description: "{{ doc('transaction_receiver_payment_source_id') }}"
+      - name: transaction_country_code
+        description: "{{ doc('transaction_country_code') }}"
+      - name: transaction_currency_code
+        description: "{{ doc('transaction_currency_code') }}"
+      - name: transaction_transaction_amount
+        description: "{{ doc('transaction_transaction_amount') }}"
+      - name: transaction_message
+        description: "{{ doc('transaction_message') }}"
+      - name: transaction_event_time
+        description: "{{ doc('transaction_event_time') }}"
+      - name: transaction_recorded_time
+        description: "{{ doc('transaction_recorded_time') }}"
+
+  - name: stg_p2p_captured
+    meta:
+      owner: "Transactions Team"
+      contact_person: "Jane Doe"
+      contact_email: "jane.doe@email.com"
+    description: "{{ doc('p2p_captured_table_description') }}"
+    
+    columns:
+      - name: transaction_event_id
+        description: "{{ doc('transaction_event_id') }}"
+      - name: transaction_sender_user_id
+        description: "{{ doc('transaction_sender_user_id') }}"
+      - name: transaction_receiver_user_id
+        description: "{{ doc('transaction_receiver_user_id') }}"
+      - name: transaction_merchant_id
+        description: "{{ doc('transaction_merchant_id') }}"
+      - name: transaction_sender_payment_source_id
+        description: "{{ doc('transaction_sender_payment_source_id') }}"
+      - name: transaction_receiver_payment_source_id
+        description: "{{ doc('transaction_receiver_payment_source_id') }}"
+      - name: transaction_country_code
+        description: "{{ doc('transaction_country_code') }}"
+      - name: transaction_currency_code
+        description: "{{ doc('transaction_currency_code') }}"
+      - name: transaction_transaction_amount
+        description: "{{ doc('transaction_transaction_amount') }}"
+      - name: transaction_message
+        description: "{{ doc('transaction_message') }}"
+      - name: transaction_event_time
+        description: "{{ doc('transaction_event_time') }}"
+      - name: transaction_recorded_time
+        description: "{{ doc('transaction_recorded_time') }}"
+
+  - name: stg_p2p_failed
+    meta:
+      owner: "Transactions Team"
+      contact_person: "Jane Doe"
+      contact_email: "jane.doe@email.com"
+    description: "{{ doc('p2p_failed_table_description') }}"
+    
+    columns:
+      - name: transaction_event_id
+        description: "{{ doc('transaction_event_id') }}"
+      - name: transaction_sender_user_id
+        description: "{{ doc('transaction_sender_user_id') }}"
+      - name: transaction_receiver_user_id
+        description: "{{ doc('transaction_receiver_user_id') }}"
+      - name: transaction_merchant_id
+        description: "{{ doc('transaction_merchant_id') }}"
+      - name: transaction_sender_payment_source_id
+        description: "{{ doc('transaction_sender_payment_source_id') }}"
+      - name: transaction_receiver_payment_source_id
+        description: "{{ doc('transaction_receiver_payment_source_id') }}"
+      - name: transaction_country_code
+        description: "{{ doc('transaction_country_code') }}"
+      - name: transaction_currency_code
+        description: "{{ doc('transaction_currency_code') }}"
+      - name: transaction_transaction_amount
+        description: "{{ doc('transaction_transaction_amount') }}"
+      - name: transaction_message
+        description: "{{ doc('transaction_message') }}"
+      - name: transaction_event_time
+        description: "{{ doc('transaction_event_time') }}"
+      - name: transaction_recorded_time
+        description: "{{ doc('transaction_recorded_time') }}"

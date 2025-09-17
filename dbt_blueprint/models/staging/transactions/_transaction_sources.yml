@@ -1,0 +1,51 @@
+version: 2
+
+sources: 
+  - name: transactions
+    tags: ["transactions"]
+    catalog: ingestion
+    schema: dbt_blueprint_dummy_ingestion
+    tables:
+      - name: raw_p2b_captured_events
+        description: "Table containing raw P2B captured transaction events"
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
+        columns:
+          - name: transactionId
+            datatests:
+              - not_null
+              - unique
+
+      - name: raw_p2b_failed_events
+        description: "Table containing raw P2B failed transaction events"
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
+        columns:
+          - name: transactionId
+            datatests:
+              - not_null
+              - unique
+
+      - name: raw_p2p_captured_events
+        description: "Table containing raw P2P captured transaction events"
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
+        columns:
+          - name: transactionId
+            datatests:
+              - not_null
+              - unique
+
+      - name: raw_p2p_failed_events
+        description: "Table containing raw P2P failed transaction events"
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
+        columns:
+          - name: transactionId
+            datatests:
+              - not_null
+              - unique

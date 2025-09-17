@@ -1,0 +1,29 @@
+version: 2
+
+sources: 
+  - name: payment_sources
+    tags: ["payment_sources"]
+    catalog: ingestion
+    schema: dbt_blueprint_dummy_ingestion
+    tables:
+      - name: raw_account_events
+        description: "Table containing raw account payment events"
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
+        columns:
+          - name: eventId
+            datatests:
+              - not_null
+              - unique
+
+      - name: raw_card_events
+        description: "Table containing raw card payment events"
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
+        columns:
+          - name: eventId
+            datatests:
+              - not_null
+              - unique
