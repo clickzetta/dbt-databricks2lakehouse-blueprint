@@ -3,7 +3,7 @@ unit_tests:
     description: "Test that phone numbers are masked correctly."
     model: users__public
     given:
-      - input: ref('int_user_events')
+      - input: ref('int_users')
         rows:
           # A best practice is to strictly only include the columns needed for the test case
           - {user_id: 1, phone_number: 12345678, age: 30}
@@ -19,7 +19,7 @@ unit_tests:
     description: "Test that only users aged 18 or older are included."
     model: users__public
     given:
-      - input: ref('int_user_events')
+      - input: ref('int_users')
         rows:
           - {user_id: 1, age: 17}
           - {user_id: 2, age: 18}
@@ -31,7 +31,7 @@ unit_tests:
     description: "Test that the 'age' column is excluded from the final output."
     model: users__public
     given:
-      - input: ref('int_user_events')
+      - input: ref('int_users')
         rows:
           - {user_id: 1, age: 25, first_name: 'Lucas'}
     expect:
