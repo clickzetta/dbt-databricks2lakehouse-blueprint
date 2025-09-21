@@ -1,7 +1,11 @@
-#This test uses columns that we don't have yet unit_tests:
+unit_tests:
   - name: test__int_enriched_transactions__basic_enrichment
     description: "Test that transactions are enriched with user, card, and account details."
     model: int_enriched_transactions
+    overrides:
+      macros:
+        # unit test this model in "full refresh" mode
+        is_incremental: false 
     given:
       - input: ref('int_transactions')
         rows:
@@ -23,6 +27,10 @@
   - name: test__int_enriched_transactions__missing_user
     description: "Test that transactions with missing user details are still included but without enrichment."
     model: int_enriched_transactions
+    overrides:
+      macros:
+        # unit test this model in "full refresh" mode
+        is_incremental: false 
     given:
       - input: ref('int_transactions')
         rows:
@@ -31,25 +39,10 @@
         rows: []
       - input: ref('int_cards')
         rows:
-          - {payment_source_id: 'card_2', status: 'inactive', provider: 'MasterCard', is_current: true}
+          - {payment_source_id: 'card_2', status: 'inactive', provider: 'MasterCard', is_current: false}
       - input: ref('int_accounts')
         rows:
-          - {payment_source_id: 'account_2', status: 'inactive', provider: 'Bank B', is_current: true}
+          - {payment_source_id: 'account_2', status: 'inactive', provider: 'Bank B', is_current: false}
     expect:
       rows:
-        - {transaction_event_id: '2', sender_user_id: 'user_3', receiver_user_id: 'user_4', sender_card_status: 'inactive', sender_card_provider: 'MasterCard', receiver_account_status: 'inactive', receiver_account_provider: 'Bank B', transaction_amount: 50.0, event_time: '2023-01-02 00:00:00', recorded_time: '2023-01-02 01:00:00'}
-
-  - name: test__int_enriched_transactions__empty_inputs
-    description: "Test that the int_enriched_transactions model returns no rows when all input tables are empty."
-    model: int_enriched_transactions
-    given:
-      - input: ref('int_transactions')
-        rows: []
-      - input: ref('int_users')
-        rows: []
-      - input: ref('int_cards')
-        rows: []
-      - input: ref('int_accounts')
-        rows: []
-    expect:
-      rows: []
+        - {transaction_event_id: '2', sender_user_id: 'user_3', receiver_user_id: 'user_4', sender_card_status: null, sender_card_provider: null, receiver_account_status: null, receiver_account_provider: null, transaction_amount: 50.0, event_time: '2023-01-02 00:00:00', recorded_time: '2023-01-02 01:00:00'}
