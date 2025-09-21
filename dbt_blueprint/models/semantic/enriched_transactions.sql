@@ -1,20 +1,10 @@
-{{ config(
-    materialized = 'incremental',
-    unique_key = 'transaction_surrogate_key',
-    incremental_strategy = 'merge',
-    on_schema_change = 'append_new_columns',
-    clustered_by = ['recorded_time', 'transaction_type', 'sender_user_id', 'receiver_user_id'],
-    incremental_predicates = [
-        "DBT_INTERNAL_DEST.recorded_time <=> DBT_INTERNAL_SOURCE.recorded_time"
-    ]
-) }}
+
 
 with transactions as (
     select *
     from {{ ref('int_transactions') }}
-    {% if is_incremental() %}
-        where recorded_time >= (select max(recorded_time) from {{ this }})
-    {% endif %}
+    where recorded_time >= (select max(recorded_time) from {{ this }})
+
 ),
 
 users as (
