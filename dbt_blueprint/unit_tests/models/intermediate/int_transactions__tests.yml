@@ -17,10 +17,10 @@ unit_tests:
           - {transaction_event_id: '4', sender_user_id: 'user_7', receiver_user_id: 'user_8', transaction_amount: 75.0, event_time: '2023-01-04 00:00:00', recorded_time: '2023-01-04 01:00:00'}
     expect:
       rows:
-        - {transaction_event_id: '1', transaction_type: 'p2b_captured', sender_user_id: 'user_1', receiver_user_id: 'user_2', transaction_amount: 100.0, event_time: '2023-01-01 00:00:00', recorded_time: '2023-01-01 01:00:00'}
-        - {transaction_event_id: '2', transaction_type: 'p2b_failed', sender_user_id: 'user_3', receiver_user_id: 'user_4', transaction_amount: 50.0, event_time: '2023-01-02 00:00:00', recorded_time: '2023-01-02 01:00:00'}
-        - {transaction_event_id: '3', transaction_type: 'p2p_captured', sender_user_id: 'user_5', receiver_user_id: 'user_6', transaction_amount: 200.0, event_time: '2023-01-03 00:00:00', recorded_time: '2023-01-03 01:00:00'}
-        - {transaction_event_id: '4', transaction_type: 'p2p_failed', sender_user_id: 'user_7', receiver_user_id: 'user_8', transaction_amount: 75.0, event_time: '2023-01-04 00:00:00', recorded_time: '2023-01-04 01:00:00'}
+        - {event_domain: 'p2b', event_state: 'captured', event_id_raw: '1', sender_user_id: 'user_1', receiver_user_id: 'user_2', transaction_amount: 100.0, event_time: '2023-01-01 00:00:00', recorded_time: '2023-01-01 01:00:00'}
+        - {event_domain: 'p2b', event_state: 'failed', event_id_raw: '2', sender_user_id: 'user_3', receiver_user_id: 'user_4', transaction_amount: 50.0, event_time: '2023-01-02 00:00:00', recorded_time: '2023-01-02 01:00:00'}
+        - {event_domain: 'p2p', event_state: 'captured', event_id_raw: '3', sender_user_id: 'user_5', receiver_user_id: 'user_6', transaction_amount: 200.0, event_time: '2023-01-03 00:00:00', recorded_time: '2023-01-03 01:00:00'}
+        - {event_domain: 'p2p', event_state: 'failed', event_id_raw: '4', sender_user_id: 'user_7', receiver_user_id: 'user_8', transaction_amount: 75.0, event_time: '2023-01-04 00:00:00', recorded_time: '2023-01-04 01:00:00'}
 
   - name: test__int_transactions__empty_inputs
     description: "Test that the int_transactions model returns no rows when all input staging tables are empty."
@@ -36,5 +36,3 @@ unit_tests:
         rows: []
     expect:
       rows: []
-
-# Add more tests

@@ -3,9 +3,9 @@
     unique_key = 'transaction_surrogate_key',
     incremental_strategy = 'merge',
     on_schema_change = 'append_new_columns',
-    clustered_by = ['from_event_timestamp', 'transaction_type', 'sender_user_id', 'receiver_user_id'],
+    clustered_by = ['recorded_time', 'transaction_type', 'sender_user_id', 'receiver_user_id'],
     incremental_predicates = [
-        "DBT_INTERNAL_DEST.from_event_timestamp <=> DBT_INTERNAL_SOURCE.from_event_timestamp"
+        "DBT_INTERNAL_DEST.recorded_time <=> DBT_INTERNAL_SOURCE.recorded_time"
     ]
 ) }}
 

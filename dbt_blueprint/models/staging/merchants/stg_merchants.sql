@@ -1,7 +1,7 @@
 with merchant_source as (
     select
         -- Renaming and casting columns from the source table. Standardize name and use proper data types. 
-        merchantId      :: int        as merchant_id,
+        merchantId      :: string        as merchant_id,
         orgNo           :: int        as organization_number,
         companyName     :: string     as merchant_name,
         countryCode     :: string     as country_code,

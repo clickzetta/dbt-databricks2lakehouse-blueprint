@@ -1,6 +1,7 @@
 {{ config(
     materialized = 'table'
 ) }}
+-- add incremental materialization
 
 with accounts as (
     select
@@ -17,6 +18,8 @@ with accounts as (
         , recorded_time
     from {{ ref('stg_account_events') }}
 )
+
+-- Add dedup for accounts with identical timestamps
 
 , accounts_scd2 as (
     select
