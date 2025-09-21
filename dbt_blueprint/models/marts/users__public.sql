@@ -11,7 +11,7 @@ with users as (
         , status
         , from_event_timestamp
         , to_event_timestamp
-    from {{ ref('int_user_events') }}
+    from {{ ref('int_users') }}
 )
 
 select * except (age)

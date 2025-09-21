@@ -1,0 +1,41 @@
+unit_tests:
+  - name: test__int_cards__basic_scd_logic
+    description: "Test the basic SCD logic for transitioning between active and inactive statuses for multiple cards."
+    model: int_cards
+    given:
+      - input: ref('stg_card_events')
+        rows:
+          - {payment_source_id: 'card_1', status: 'active', recorded_time: '2023-01-01 01:00:00'}
+          - {payment_source_id: 'card_1', status: 'inactive', recorded_time: '2023-06-01 01:00:00'}
+          - {payment_source_id: 'card_2', status: 'active', recorded_time: '2023-01-01 01:00:00'}
+    expect:
+      rows:
+        - {payment_source_id: 'card_1', status: 'active', from_timestamp: '2023-01-01 01:00:00', to_timestamp: '2023-06-01 01:00:00', is_current: false}
+        - {payment_source_id: 'card_1', status: 'inactive', from_timestamp: '2023-06-01 01:00:00', to_timestamp: '9999-12-31 23:59:59', is_current: true}
+        - {payment_source_id: 'card_2', status: 'active', from_timestamp: '2023-01-01 01:00:00', to_timestamp: '9999-12-31 23:59:59', is_current: true}
+
+  - name: test__int_cards__multiple_status_transitions
+    description: "Test multiple status transitions for a single card, ensuring correct from_timestamp and to_timestamp values."
+    model: int_cards
+    given:
+      - input: ref('stg_card_events')
+        rows:
+          - {payment_source_id: 'card_3', status: 'active', recorded_time: '2023-02-01 01:00:00'}
+          - {payment_source_id: 'card_3', status: 'updated', recorded_time: '2023-08-01 01:00:00'}
+          - {payment_source_id: 'card_3', status: 'inactive', recorded_time: '2024-02-01 01:00:00'}
+    expect:
+      rows:
+        - {payment_source_id: 'card_3', status: 'active', from_timestamp: '2023-02-01 01:00:00', to_timestamp: '2023-08-01 01:00:00', is_current: false}
+        - {payment_source_id: 'card_3', status: 'updated', from_timestamp: '2023-08-01 01:00:00', to_timestamp: '2024-02-01 01:00:00', is_current: false}
+        - {payment_source_id: 'card_3', status: 'inactive', from_timestamp: '2024-02-01 01:00:00', to_timestamp: '9999-12-31 23:59:59', is_current: true}
+
+  - name: test__int_cards__new_card_creation
+    description: "Test the creation of a new card with no prior history."
+    model: int_cards
+    given:
+      - input: ref('stg_card_events')
+        rows:
+          - {payment_source_id: 'card_4', status: 'active', recorded_time: '2023-03-01 01:00:00'}
+    expect:
+      rows:
+        - {payment_source_id: 'card_4', status: 'active', from_timestamp: '2023-03-01 01:00:00', to_timestamp: '9999-12-31 23:59:59', is_current: true}

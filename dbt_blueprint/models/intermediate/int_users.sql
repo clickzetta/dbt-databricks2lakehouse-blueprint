@@ -50,6 +50,10 @@ with users as (
         , from_event_timestamp
         , coalesce(to_event_timestamp, '9999-12-31 23:59:59') as to_event_timestamp
         , recorded_time
+        , case 
+            when to_event_timestamp is null then true
+            else false
+          end as is_current
     from users_scd2
 )
 

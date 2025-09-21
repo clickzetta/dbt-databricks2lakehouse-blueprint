@@ -1,7 +1,7 @@
 unit_tests:
-  - name: test__int_user_events__scd_logic
+  - name: test__int_users__scd_logic
     description: "Test the SCD logic for the user events dimension."
-    model: int_user_events
+    model: int_users
     given:
       - input: ref('stg_user_events')
         rows:
@@ -15,9 +15,9 @@ unit_tests:
         - {user_id: 2, first_name: 'Jane', last_name: 'Smith', status: 'active', from_event_timestamp: '2023-01-01 00:00:00', to_event_timestamp: '9999-12-31 23:59:59', recorded_time: '2023-01-01 01:00:00'}
   
   
-  - name: test__int_user_events__multiple_status_changes
+  - name: test__int_users__multiple_status_changes
     description: "Test multiple status changes for a single user."
-    model: int_user_events
+    model: int_users
     given:
       - input: ref('stg_user_events')
         rows:
@@ -31,9 +31,9 @@ unit_tests:
         - {user_id: 3, first_name: 'Alice', last_name: 'Brown', status: 'inactive', from_event_timestamp: '2024-02-01 00:00:00', to_event_timestamp: '9999-12-31 23:59:59', recorded_time: '2024-02-01 01:00:00'}
   
   
-  - name: test__int_user_events__new_user
+  - name: test__int_users__new_user
     description: "Test a new user with no prior history."
-    model: int_user_events
+    model: int_users
     given:
       - input: ref('stg_user_events')
         rows:
