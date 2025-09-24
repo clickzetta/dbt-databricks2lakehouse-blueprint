@@ -3,8 +3,6 @@
 with transactions as (
     select *
     from {{ ref('int_transactions') }}
-    where recorded_time >= (select max(recorded_time) from {{ this }})
-
 ),
 
 users as (
