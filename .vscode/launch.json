@@ -1,0 +1,78 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Deps",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "uv run dbt deps",
+            "cwd": "${cwd}/dbt_blueprint"
+        },
+        {
+            "name": "Run Compile",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "uv run dbt compile",
+            "cwd": "${cwd}/dbt_blueprint"
+        },
+        {
+            "name": "Run DBT model",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "uv run dbt run --select ${fileBasenameNoExtension}",
+            "cwd": "${cwd}/dbt_blueprint"
+        },
+        {
+            "name": "Run Empty DBT model",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "uv run dbt run --empty --select ${fileBasenameNoExtension}",
+            "cwd": "${cwd}/dbt_blueprint"
+        },
+        {
+            "name": "Run Upstream DBT model",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "uv run dbt run --select +${fileBasenameNoExtension}",
+            "cwd": "${cwd}/dbt_blueprint"
+        },
+        {
+            "name": "Run Downstream DBT model",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "uv run dbt run --select ${fileBasenameNoExtension}+",
+            "cwd": "${cwd}/dbt_blueprint"
+        },
+        {
+            "name": "Run Upstream Empty DBT model",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "uv run dbt run --empty --select +${fileBasenameNoExtension}",
+            "cwd": "${cwd}/dbt_blueprint"
+        },
+        {
+            "name": "Full Refresh DBT model",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "uv run dbt run --select ${fileBasenameNoExtension} --full-refresh",
+            "cwd": "${cwd}/dbt_blueprint"
+        },
+        {
+            "name": "Unit Test DBT model",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "uv run dbt test --select ${fileBasenameNoExtension},test_type:unit",
+            "cwd": "${cwd}/dbt_blueprint"
+        },
+        {
+            "name": "Build DBT model",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "uv run dbt build --select ${fileBasenameNoExtension}",
+            "cwd": "${cwd}/dbt_blueprint"
+        },
+    ]
+}
