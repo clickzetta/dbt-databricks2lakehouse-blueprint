@@ -1,0 +1,24 @@
+version: 2
+
+exposures:
+  - name: transaction_dashboard
+    type: dashboard
+    maturity: high
+    url: "https://analytics.example.com/dashboards/transaction_dashboard"
+    owner:
+      name: analytics_team
+      email: analytics@example.com
+    description: "A dashboard used by the stakeholders team to monitor daily transaction metrics."
+    depends_on:
+      - ref('marts_payments_daily')
+      - ref('marts_user_card_transactions_daily')
+
+  - name: merchant_churn_ml_model
+    type: ml
+    maturity: low
+    owner:
+      name: finance_team
+      email: finance@example.com
+    description: "A report used by the finance team to analyze merchant performance over time."
+    depends_on:
+      - ref('dim_merchant_scd2')

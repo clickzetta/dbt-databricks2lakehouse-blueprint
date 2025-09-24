@@ -13,8 +13,9 @@ with users as (
         , status
         , from_event_timestamp
         , to_event_timestamp
+        , is_current
     from {{ ref('int_users') }}
 )
 
 select *
-from {{ ref('int_users') }}
+from users

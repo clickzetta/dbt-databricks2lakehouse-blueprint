@@ -97,6 +97,12 @@ From the repo root:
 
 > **Tip:** If you change code, `state:modified+` only rebuilds what changed and its dependents.
 
+5. Generate documentation and serve DAG
+   ```bash
+   uv run dbt docs generate
+   uv run dbt docs serve
+   ```
+   ![alt text](image.png)
 ---
 
 ## 4. Project Structure

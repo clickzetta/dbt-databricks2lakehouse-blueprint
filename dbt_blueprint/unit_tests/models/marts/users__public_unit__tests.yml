@@ -1,7 +1,7 @@
 unit_tests:
   - name: test__users__phone_number_masking
     description: "Test that phone numbers are masked correctly."
-    model: users__public
+    model: dim_user_scd2__public
     given:
       - input: ref('int_users')
         rows:
@@ -17,7 +17,7 @@ unit_tests:
 
   - name: test__users__age_filtering
     description: "Test that only users aged 18 or older are included."
-    model: users__public
+    model: dim_user_scd2__public
     given:
       - input: ref('int_users')
         rows:
@@ -29,7 +29,7 @@ unit_tests:
 
   - name: test__users__excluded_columns
     description: "Test that the 'age' column is excluded from the final output."
-    model: users__public
+    model: dim_user_scd2__public
     given:
       - input: ref('int_users')
         rows:
