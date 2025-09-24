@@ -1,4 +1,4 @@
-
+{{ config(materialized='table') }}
 
 with transactions as (
     select *
@@ -9,16 +9,14 @@ with transactions as (
 
 users as (
     select
-        user_id
+        *
     from {{ ref('int_users') }}
     where is_current = true
 ),
 
 cards as (
     select
-        payment_source_id
-        , status as card_status
-        , provider as card_provider
+        *
     from {{ ref('int_cards') }}
     where is_current = true
 ),
@@ -41,7 +39,7 @@ enriched_transactions as (
         , accounts.account_provider as receiver_account_provider
     from transactions
     left join users as sender_user
-        on transactions.sender_user_id = sender_user.user_id
+        on transactions.sender_user_id = sender_user.user_id and 
     left join users as receiver_user
         on transactions.receiver_user_id = receiver_user.user_id
     left join cards

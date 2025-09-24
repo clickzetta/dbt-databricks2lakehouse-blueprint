@@ -1,3 +1,5 @@
+{{ config(materialized='table') }}
+
 with tx as (
   select
       merchant_id,
