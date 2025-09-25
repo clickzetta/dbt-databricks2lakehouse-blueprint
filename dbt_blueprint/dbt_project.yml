@@ -36,8 +36,8 @@ models:
     +persist_docs:
       relation: true
       columns: true
-    contracts: 
-      enabled: true
+      contracts: 
+        enabled: true
 
     # Config indicated by + and applies to all files under models/staging/
     staging:
@@ -49,14 +49,14 @@ models:
         node_color: "#CD7F32" # bronze color
 
     intermediate:
-      +tags: ["bronze", "intermediate"] # all intermediate should be tagged with minimum ["bronze", "intermediate"]
+      +tags: ["silver", "intermediate"] # all intermediate should be tagged with minimum ["bronze", "intermediate"]
       +materialized: view # options: view or ephemerally
       +schema: intermediate #recommended to define separate schemas for our separate subfolders
       +docs:
         node_color: "#A0A0A0" # silver color
     
     marts:
-      +tags: ["silver", "marts"] # all marts should be tagged with minimum ["silver", "marts"]
+      +tags: ["gold", "marts"] # all marts should be tagged with minimum ["silver", "marts"]
       +materialized: table # best practices is to config a mart as table or incremental load
       +schema: marts #recommended to define separate schemas for our separate subfolders
       +docs:
@@ -65,4 +65,6 @@ models:
     semantic:
       +materialized: table 
       +schema: semantic 
+      +docs:
+        node_color: "#FFD700" # gold color
 

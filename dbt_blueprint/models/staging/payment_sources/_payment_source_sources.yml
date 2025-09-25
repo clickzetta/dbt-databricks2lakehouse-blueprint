@@ -15,7 +15,18 @@ sources:
           - name: eventId
             datatests:
               - not_null
-              - unique
+              - unique 
+          - name: payment_source_id
+          - name: user_id
+          - name: status
+          - name: bic
+          - name: bank_name
+          - name: country_code
+          - name: account_type
+          - name: provider
+          - name: created_time
+          - name: updated_time
+          - name: recorded_time
 
       - name: raw_card_events
         description: "Table containing raw card payment events"
@@ -26,4 +37,22 @@ sources:
           - name: eventId
             datatests:
               - not_null
+              - unique 
+          - name: payment_source_id
+            datatests:
+              - not_null
               - unique
+          - name: user_id
+          - name: status
+          - name: brand
+          - name: network
+          - name: bin6
+          - name: last4
+          - name: expiry_month
+          - name: expiry_year
+          - name: issuer_country
+          - name: tokenized
+          - name: provider
+          - name: created_time
+          - name: updated_time
+          - name: recorded_time

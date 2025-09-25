@@ -16,6 +16,17 @@ sources:
             datatests:
               - not_null
               - unique
+          - name: sender_user_id
+          - name: receiver_user_id
+          - name: merchant_id
+          - name: sender_payment_source_id
+          - name: receiver_payment_source_id
+          - name: country_code
+          - name: currency_code
+          - name: amount
+          - name: message
+          - name: event_time
+          - name: recorded_time
 
       - name: raw_p2b_failed_events
         description: "Table containing raw P2B failed transaction events"
@@ -27,6 +38,17 @@ sources:
             datatests:
               - not_null
               - unique
+          - name: sender_user_id
+          - name: receiver_user_id
+          - name: merchant_id
+          - name: sender_payment_source_id
+          - name: receiver_payment_source_id
+          - name: country_code
+          - name: currency_code
+          - name: amount
+          - name: message
+          - name: event_time
+          - name: recorded_time
 
       - name: raw_p2p_captured_events
         description: "Table containing raw P2P captured transaction events"
@@ -38,6 +60,17 @@ sources:
             datatests:
               - not_null
               - unique
+          - name: sender_user_id
+          - name: receiver_user_id
+          - name: merchant_id
+          - name: sender_payment_source_id
+          - name: receiver_payment_source_id
+          - name: country_code
+          - name: currency_code
+          - name: amount
+          - name: message
+          - name: event_time
+          - name: recorded_time
 
       - name: raw_p2p_failed_events
         description: "Table containing raw P2P failed transaction events"
@@ -49,3 +82,14 @@ sources:
             datatests:
               - not_null
               - unique
+          - name: sender_user_id
+          - name: receiver_user_id
+          - name: merchant_id
+          - name: sender_payment_source_id
+          - name: receiver_payment_source_id
+          - name: country_code
+          - name: currency_code
+          - name: amount
+          - name: message
+          - name: event_time
+          - name: recorded_time

@@ -16,3 +16,12 @@ sources:
             datatests:
               - not_null
               - unique
+          - name: phoneNumber
+          - name: firstName
+          - name: lastName
+          - name: dateOfBirth
+          - name: address
+          - name: countryCode
+          - name: status
+          - name: eventTime
+          - name: recordedTime

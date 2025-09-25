@@ -19,4 +19,4 @@ connection_databricks:
       host: dbc-a505ff10-0af5.cloud.databricks.com
       http_path: /sql/1.0/warehouses/4fa4ca06332da87f
       token: "{{ env_var('BLUEPRINT_DATABRICKS_TOKEN') }}"
-      threads: 1
+      threads: 4
