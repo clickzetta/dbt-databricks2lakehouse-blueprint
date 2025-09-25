@@ -1,7 +1,6 @@
 {{ config(
     materialized = 'table'
 ) }}
--- add incremental materialization
 
 with accounts as (
     select

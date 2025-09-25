@@ -1,3 +1,7 @@
+{{ config(
+    materialized = 'table'
+) }}
+
 with merchants as (
     select
         merchant_id

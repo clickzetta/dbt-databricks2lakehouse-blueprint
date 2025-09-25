@@ -1,3 +1,7 @@
+{{ config(
+    materialized = 'table'
+) }}
+
 with users as (
     select 
         user_id
