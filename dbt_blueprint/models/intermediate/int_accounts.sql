@@ -19,8 +19,6 @@ with accounts as (
     from {{ ref('stg_account_events') }}
 )
 
--- Add dedup for accounts with identical timestamps
-
 , accounts_scd2 as (
     select
         payment_source_id

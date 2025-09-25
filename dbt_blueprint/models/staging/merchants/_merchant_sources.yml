@@ -13,9 +13,24 @@ sources:
           error_after: {count: 48, period: hour}
         columns:
           - name: merchantId
+            data_type: string
             datatests:
               - not_null
               - unique
+          - name: orgNo
+            data_type: int
+          - name: companyName
+            data_type: string
+          - name: countryCode
+            data_type: string
+          - name: statusType
+            data_type: string
+          - name: createdTime
+            data_type: timestamp
+          - name: updatedTime
+            data_type: timestamp
+          - name: recordedTime
+            data_type: timestamp
 
   - name: industry_codes
     tags: ["industry_codes"]
@@ -29,6 +44,10 @@ sources:
           error_after: {count: 48, period: hour}
         columns:
           - name: orgNo
-            datatests:
-              - not_null
-              - unique
+            data_type: int
+          - name: code
+            data_type: int
+          - name: countryCode
+            data_type: string
+          - name: industryName
+            data_type: string

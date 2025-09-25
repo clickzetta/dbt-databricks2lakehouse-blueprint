@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: fact_transaction
+    meta:
+      owner: "Team Data & Insight"
+      Data producer: "Team Merchant Profile"
+      version: "v2"
+    description: '{{ doc("merchant_table_description")}}'
+    config:
+      tags: ["daily"]
+      tblproperties:
+        vmp.metadata.json.data_domain: "transactions"
+        vmp.metadata.json.integration_status: "prod"
+        vmp.metadata.json.service_level.producer_team: "Team Data Product Hub"
+        vmp.metadata.json.service_level.producer_team_slack_channel: "help-data-analytics"
+        vmp.metadata.json.service_level.producer_contact_person: "Alex"
+        vmp.metadata.json.data_update_frequency: "hourly"
+        vmp.metadata.json.service_level.service_level_description: "There are currently no plans to deprecate this dataset. Respond to incidents within 24 hours. The team will aim to announce depracation 4 weeks prior. Additive changes to schema will only be made if an agreement with DPH is reached and the YAML data contract is changed."
+        vmp.metadata.json.governance.platform_managed_access_control: "true"
+        vmp.metadata.json.governance.producer_access_approval_required: "false"
+        vmp.metadata.json.governance.personal_data: "false"
+        vmp.metadata.json.governance.risk_and_compliance_access_approval_required: "false"
+
+    description: "Fact table containing transaction data, including sender, receiver, merchant, and payment details."
+    tags: ["fact", "transactions", "marts"]
+    columns:
+      - name: transaction_uid
+        description: "Unique identifier for the transaction."
+        data_type: string
+        data_tests:
+          - not_null
+          - unique
+      - name: event_domain
+        description: "Domain of the event (e.g., payment, refund)."
+        data_type: string
+        data_tests:
+          - not_null
+      - name: event_state
+        description: "State of the event (e.g., captured, failed)."
+        data_type: string
+        data_tests:
+          - not_null
+      - name: event_id_raw
+        description: "Raw event ID from the source system."
+        data_type: string
+      - name: sender_user_id
+        description: "User ID of the sender in the transaction."
+        data_type: string
+      - name: receiver_user_id
+        description: "User ID of the receiver in the transaction."
+        data_type: string
+      - name: merchant_id
+        description: "Merchant ID involved in the transaction."
+        data_type: string
+      - name: sender_payment_source_id
+        description: "Payment source ID of the sender."
+        data_type: string
+      - name: receiver_payment_source_id
+        description: "Payment source ID of the receiver."
+        data_type: string
+      - name: country_code
+        description: "Country code where the transaction occurred."
+        data_type: string
+      - name: currency_code
+        description: "Currency code used in the transaction."
+        data_type: string
+      - name: transaction_amount
+        description: "Amount of the transaction."
+        data_type: double
+      - name: message
+        description: "Message associated with the transaction."
+        data_type: string
+      - name: event_time
+        description: "Timestamp when the event occurred."
+        data_type: timestamp
+        data_tests:
+          - not_null
+      - name: recorded_time
+        description: "Timestamp when the event was recorded."
+        data_type: timestamp
+        data_tests:
+          - not_null

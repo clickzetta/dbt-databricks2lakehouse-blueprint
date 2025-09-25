@@ -22,9 +22,7 @@ models:
         description: "{{ doc('merchant_recorded_time') }}"
 
   - name: stg_industry_codes
-    description: >
-      This model transforms the raw `industry_codes` source table into a standardized format 
-      with renamed and casted columns for better usability in downstream models.
+    description: "{{ doc('industry_codes_table_description') }}"
     columns:
       - name: organization_number
         description: "{{ doc('organization_number') }}"
