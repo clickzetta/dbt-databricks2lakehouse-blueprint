@@ -1,4 +1,7 @@
 '''
+Example python model doing the same thing as the SQL model in the same directory.
+I use a sql warehouse so I commented this model out.
+
 import pyspark.sql.functions as F
 from pyspark.sql import DataFrame
 
