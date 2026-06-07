@@ -1,17 +1,18 @@
 with source_user_events as (
-    select
-        -- Migrated: :: cast syntax → CAST() for Lakehouse compatibility
-        CAST(userId      AS STRING)    as user_id,
-        CAST(phoneNumber AS BIGINT)    as phone_number,
-        CAST(firstName   AS STRING)    as first_name,
-        CAST(lastName    AS STRING)    as last_name,
-        CAST(dateOfBirth AS DATE)      as date_of_birth,
-        CAST(address     AS STRING)    as address,
-        CAST(countryCode AS STRING)    as country_code,
-        CAST(status      AS STRING)    as status,
-        CAST(eventTime   AS TIMESTAMP) as event_time,
-        CAST(recordedTime AS TIMESTAMP) as recorded_time
-    from {{ source('users', 'user_events') }}
+    select 
+        -- Renaming and casting columns from the source table. Standardize name and use proper data types. 
+        userId          :: string      as user_id,
+        phoneNumber     :: int         as phone_number,
+        firstName       :: string      as first_name,
+        lastName        :: string      as last_name,
+        dateOfBirth     :: date        as date_of_birth,
+        address         :: string      as address,
+        countryCode     :: string      as country_code,
+        status          :: string      as status,
+        eventTime       :: timestamp   as event_time,
+        recordedTime    :: timestamp   as recorded_time
+
+    from {{ source('users', 'user_events') }}    
 )
 
 select *

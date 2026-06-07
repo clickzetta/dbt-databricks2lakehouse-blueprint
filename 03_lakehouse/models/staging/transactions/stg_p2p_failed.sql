@@ -1,17 +1,17 @@
 with p2p_failed_source as (
     select
-        CAST(transactionId             AS STRING)    as transaction_event_id,
-        CAST(sender_user_id            AS STRING)    as sender_user_id,
-        CAST(receiver_user_id          AS STRING)    as receiver_user_id,
-        CAST(merchant_id               AS STRING)    as merchant_id,
-        CAST(sender_payment_source_id  AS STRING)    as sender_payment_source_id,
-        CAST(receiver_payment_source_id AS STRING)   as receiver_payment_source_id,
-        CAST(country_code              AS STRING)    as country_code,
-        CAST(currency_code             AS STRING)    as currency_code,
-        CAST(amount                    AS DOUBLE)    as transaction_amount,
-        CAST(message                   AS STRING)    as message,
-        CAST(event_time                AS TIMESTAMP) as event_time,
-        CAST(recorded_time             AS TIMESTAMP) as recorded_time
+        transaction_event_id       :: string    as transaction_event_id,
+        sender_user_id             :: string    as sender_user_id,
+        receiver_user_id           :: string    as receiver_user_id,
+        merchant_id                :: string    as merchant_id,
+        sender_payment_source_id   :: string    as sender_payment_source_id,
+        receiver_payment_source_id :: string    as receiver_payment_source_id,
+        country_code               :: string    as country_code,
+        currency_code              :: string    as currency_code,
+        amount                     :: double    as transaction_amount,
+        message                    :: string    as message,
+        event_time                 :: timestamp as event_time,
+        recorded_time              :: timestamp as recorded_time
     from {{ source('transactions', 'raw_p2p_failed_events') }}
 )
 

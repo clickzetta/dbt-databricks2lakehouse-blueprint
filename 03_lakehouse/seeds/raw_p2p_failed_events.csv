@@ -1,4 +1,4 @@
-transactionId,sender_user_id,receiver_user_id,merchant_id,sender_payment_source_id,receiver_payment_source_id,country_code,currency_code,amount,message,event_time,recorded_time
+transaction_event_id,sender_user_id,receiver_user_id,merchant_id,sender_payment_source_id,receiver_payment_source_id,country_code,currency_code,amount,message,event_time,recorded_time
 f6fcedf9-d872-4d40-ab41-8ef60e789576,user_0017,user_0083,,acc_0023,acc_0077,US,USD,1602.73,rent,2024-01-04 05:48:44,2024-01-04 05:48:53
 c1c6ef5b-07fd-4dbb-be45-e9e25b9a415f,user_0092,user_0091,,acc_0036,acc_0055,NO,NOK,1791.49,shopping,2023-08-26 06:10:53,2023-08-26 06:11:08
 0c113e3c-e0d8-478e-a0c1-9637389b518c,user_0060,user_0039,,acc_0067,acc_0080,SG,SGD,797.32,lunch,2023-06-19 11:42:41,2023-06-19 11:42:42

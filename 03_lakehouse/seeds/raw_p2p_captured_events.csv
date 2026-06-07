@@ -1,4 +1,4 @@
-transactionId,sender_user_id,receiver_user_id,merchant_id,sender_payment_source_id,receiver_payment_source_id,country_code,currency_code,amount,message,event_time,recorded_time
+transaction_event_id,sender_user_id,receiver_user_id,merchant_id,sender_payment_source_id,receiver_payment_source_id,country_code,currency_code,amount,message,event_time,recorded_time
 3d03ee18-9f65-4066-b7d7-24aa40f19c47,user_0041,user_0047,,acc_0014,acc_0012,DE,EUR,15.36,shopping,2023-10-30 15:04:48,2023-10-30 15:05:03
 3844b2dc-3232-4ab7-beee-446e11c199d6,user_0014,user_0017,,acc_0012,acc_0024,AU,AUD,864.8,payment,2023-07-29 12:48:39,2023-07-29 12:48:57
 5e40d3df-9610-45f8-8e76-c752d733583f,user_0014,user_0004,,acc_0012,acc_0046,SE,SEK,1110.67,payment,2023-11-13 22:29:41,2023-11-13 22:30:01

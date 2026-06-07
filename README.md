@@ -91,5 +91,4 @@ Tested on **AWS Singapore** (instance `de1cbb4a`, dbt-clickzetta 1.7.10):
 
 ## Related
 
-- [Databricks → 云器 Lakehouse 迁移评估系列](https://github.com/clickzetta/Databricks-vs-Lakehouse)
 - Original: [Alex-Teodosiu/dbt-blueprint](https://github.com/Alex-Teodosiu/dbt-blueprint) ⭐72

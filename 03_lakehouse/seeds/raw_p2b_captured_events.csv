@@ -1,4 +1,4 @@
-transactionId,sender_user_id,receiver_user_id,merchant_id,sender_payment_source_id,receiver_payment_source_id,country_code,currency_code,amount,message,event_time,recorded_time
+transaction_event_id,sender_user_id,receiver_user_id,merchant_id,sender_payment_source_id,receiver_payment_source_id,country_code,currency_code,amount,message,event_time,recorded_time
 1bccc97b-54ee-4cfe-a7eb-968911e94e94,user_0046,,merch_0027,acc_0038,acc_0071,US,USD,1046.36,,2023-09-23 03:21:28,2023-09-23 03:21:32
 4a8d58d7-dd1c-4886-b982-7b93ead26300,user_0064,,merch_0005,acc_0053,acc_0014,US,USD,512.31,rent,2023-05-08 12:04:40,2023-05-08 12:04:47
 a90b2fbe-19dc-4e05-bfc3-8f5e8ac57c97,user_0028,,merch_0015,acc_0025,acc_0044,GB,GBP,219.99,transfer,2023-11-02 04:07:17,2023-11-02 04:07:19

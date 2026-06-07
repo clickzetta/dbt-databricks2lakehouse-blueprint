@@ -1,13 +1,13 @@
 with merchant_source as (
     select
-        CAST(merchantId   AS STRING)    as merchant_id,
-        CAST(orgNo        AS INT)       as organization_number,
-        CAST(merchantName AS STRING)    as merchant_name,
-        CAST(countryCode  AS STRING)    as country_code,
-        CAST(statusType   AS STRING)    as status_type,
-        CAST(createdTime  AS TIMESTAMP) as created_time,
-        CAST(updatedTime  AS TIMESTAMP) as updated_time,
-        CAST(recordedTime AS TIMESTAMP) as recorded_time
+        merchantId      :: string     as merchant_id,
+        orgNo           :: int        as organization_number,
+        merchantName    :: string     as merchant_name,
+        countryCode     :: string     as country_code,
+        statusType      :: string     as status_type,
+        createdTime     :: timestamp  as created_time,
+        updatedTime     :: timestamp  as updated_time,
+        recordedTime    :: timestamp  as recorded_time
     from {{ source('merchants', 'merchant_events') }}
 )
 

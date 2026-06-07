@@ -8,7 +8,7 @@ sources:
       - name: raw_p2b_captured_events
         description: "Raw P2B captured transaction events"
         columns:
-          - name: transactionId
+          - name: transaction_event_id
             data_tests:
               - not_null
               - unique
@@ -27,7 +27,7 @@ sources:
       - name: raw_p2b_failed_events
         description: "Raw P2B failed transaction events"
         columns:
-          - name: transactionId
+          - name: transaction_event_id
             data_tests:
               - not_null
               - unique
@@ -46,7 +46,7 @@ sources:
       - name: raw_p2p_captured_events
         description: "Raw P2P captured transaction events"
         columns:
-          - name: transactionId
+          - name: transaction_event_id
             data_tests:
               - not_null
               - unique
@@ -65,7 +65,7 @@ sources:
       - name: raw_p2p_failed_events
         description: "Raw P2P failed transaction events"
         columns:
-          - name: transactionId
+          - name: transaction_event_id
             data_tests:
               - not_null
               - unique
