@@ -1,0 +1,72 @@
+version: 2
+
+models:
+  - name: stg_account_events
+    meta:
+      owner: "Payment Sources Team"
+      contact_person: "John Smith"
+      contact_email: "john.smith@email.com"
+    description: "{{ doc('account_events_table_description') }}"
+    
+    columns:
+      - name: payment_source_id
+        description: "{{ doc('payment_source_id') }}"
+      - name: payment_source_user_id
+        description: "{{ doc('payment_source_user_id') }}"
+      - name: payment_source_status
+        description: "{{ doc('payment_source_status') }}"
+      - name: payment_source_bic
+        description: "{{ doc('payment_source_bic') }}"
+      - name: payment_source_bank_name
+        description: "{{ doc('payment_source_bank_name') }}"
+      - name: payment_source_country_code
+        description: "{{ doc('payment_source_country_code') }}"
+      - name: payment_source_account_type
+        description: "{{ doc('payment_source_account_type') }}"
+      - name: payment_source_provider
+        description: "{{ doc('payment_source_provider') }}"
+      - name: payment_source_created_time
+        description: "{{ doc('payment_source_created_time') }}"
+      - name: payment_source_updated_time
+        description: "{{ doc('payment_source_updated_time') }}"
+      - name: payment_source_recorded_time
+        description: "{{ doc('payment_source_recorded_time') }}"
+
+  - name: stg_card_events
+    meta:
+      owner: "Payment Sources Team"
+      contact_person: "John Smith"
+      contact_email: "john.smith@email.com"
+    description: "{{ doc('card_events_table_description') }}"
+    
+    columns:
+      - name: payment_source_id
+        description: "{{ doc('payment_source_id') }}"
+      - name: payment_source_user_id
+        description: "{{ doc('payment_source_user_id') }}"
+      - name: payment_source_status
+        description: "{{ doc('payment_source_status') }}"
+      - name: payment_source_brand
+        description: "{{ doc('payment_source_brand') }}"
+      - name: payment_source_network
+        description: "{{ doc('payment_source_network') }}"
+      - name: payment_source_bin6
+        description: "{{ doc('payment_source_bin6') }}"
+      - name: payment_source_last4
+        description: "{{ doc('payment_source_last4') }}"
+      - name: payment_source_expiry_month
+        description: "{{ doc('payment_source_expiry_month') }}"
+      - name: payment_source_expiry_year
+        description: "{{ doc('payment_source_expiry_year') }}"
+      - name: payment_source_issuer_country
+        description: "{{ doc('payment_source_issuer_country') }}"
+      - name: payment_source_tokenized
+        description: "{{ doc('payment_source_tokenized') }}"
+      - name: payment_source_provider
+        description: "{{ doc('payment_source_provider') }}"
+      - name: payment_source_created_time
+        description: "{{ doc('payment_source_created_time') }}"
+      - name: payment_source_updated_time
+        description: "{{ doc('payment_source_updated_time') }}"
+      - name: payment_source_recorded_time
+        description: "{{ doc('payment_source_recorded_time') }}"

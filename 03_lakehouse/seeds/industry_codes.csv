@@ -1,0 +1,31 @@
+orgNo,code,countryCode,industryName
+1000,TRP,GB,Transport
+1001,FAB,GB,Food and Beverage
+1002,RET,US,Retail
+1003,ENT,US,Entertainment
+1004,TRP,SE,Transport
+1005,TEC,US,Technology
+1006,FAB,FR,Food and Beverage
+1007,RET,AU,Retail
+1008,RET,NL,Retail
+1009,ENT,SG,Entertainment
+1010,FAB,GB,Food and Beverage
+1011,EDU,FR,Education
+1012,TRP,AU,Transport
+1013,TRP,SG,Transport
+1014,FAB,SE,Food and Beverage
+1015,TEC,SE,Technology
+1016,EDU,US,Education
+1017,FAB,NO,Food and Beverage
+1018,HLT,NL,Healthcare
+1019,TRP,SE,Transport
+1020,HLT,NO,Healthcare
+1021,ENT,NL,Entertainment
+1022,TRP,DE,Transport
+1023,HLT,NO,Healthcare
+1024,EDU,US,Education
+1025,TRP,AU,Transport
+1026,HLT,US,Healthcare
+1027,RET,SG,Retail
+1028,FAB,AU,Food and Beverage
+1029,RET,NO,Retail

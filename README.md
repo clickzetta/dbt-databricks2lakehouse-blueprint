@@ -1,137 +1,95 @@
-# dbt-blueprint
+# dbt-databricks → dbt-clickzetta Migration
 
-This repo is a comprehensive blueprint of how to use dbt to run data pipelines using Databricks compute. It showcases modular project structure, data contracts, various tests, incremental models with selectors, and Terraform-provisioned Databricks Workflows. No real financial data is used, only dummy data.
+[![Original](https://img.shields.io/badge/Original-Alex--Teodosiu/dbt--blueprint-⭐72-blue)](https://github.com/Alex-Teodosiu/dbt-blueprint)
 
-A copy-and-run **dbt + Databricks** blueprint for building **trustworthy, production-shaped data**:
+Migrate a **dbt-databricks** project (staging → intermediate → marts → semantic, 30 models, 36 tests) to **dbt-clickzetta** with a **single-line adapter change** in `profiles.yml`.
 
-- Modular layers (sources → staging → marts → semantic)
-- Contracts & high-leverage tests
-- Incremental models with selectors 
-- Ready-to-demo dummy data (seeds)
-- Optional Databricks Workflows via Terraform (IaC)
-
-> All data is fake and safe to use publicly. Do **not** commit secrets.
-
----
-
-## 1. Requirements
-
-- Python **3.11+**
-- [uv](https://docs.astral.sh/uv/) (or use `venv` + `pip`)
-- A **Databricks** workspace (trial is fine)
-- A **Personal Access Token (PAT)** from Databricks
-- A **SQL Warehouse** *or* a **cluster** (you’ll need its **HTTP Path**)
-
----
-
-## 2. Setup
-
-### 2.1 Clone & Install
+## Quick Start
 
 ```bash
-git clone https://github.com/<you>/dbt-blueprint.git
-cd dbt-blueprint
-uv sync
+cp .env.example .env   # Fill in credentials
+python3 setup.py       # deps + seed + run
+python3 e2e.py         # 28/28 assertions ✅
 ```
 
-Create `~/.dbt/profiles.yml` (macOS/Linux) or `%USERPROFILE%\.dbt\profiles.yml` (Windows). Use token auth and reference environment variables to avoid hardcoding secrets.
+Or run dbt directly:
+
+```bash
+cd 03_lakehouse
+export DBT_PROFILES_DIR=$(pwd)
+dbt deps && dbt seed && dbt run && dbt test
+# seed:  9/9  PASS
+# run:  30/30 PASS
+# test: 36/36 PASS
+```
+
+## Project Structure
+
+```
+├── 01_source/            ← Original dbt-databricks project (preserved)
+│   └── dbt_blueprint/    #   profiles.yml with type: databricks
+├── 02_migration/         ← Migration notes & change log
+├── 03_lakehouse/         ← Migrated dbt-clickzetta project
+│   ├── models/           #   staging → intermediate → marts → semantic
+│   ├── macros/           #   calculate_age, generate_schema_name (updated)
+│   ├── seeds/            #   9 CSV files with financial domain test data
+│   ├── profiles.yml      #   type: clickzetta ← THE key change
+│   └── dbt_project.yml
+├── .env.example
+├── setup.py              ← One-click: deps + seed + run
+└── e2e.py                ← Automated assertions
+```
+
+## The One Change That Matters
 
 ```yaml
-vmp_blueprint:
-  target: dev
+# Before (dbt-databricks) — 01_source/dbt_blueprint/profiles.yml
+connection_databricks:
+  outputs:
+    dev_local:
+      type: databricks
+      catalog: dbt_blueprint
+      host: dbc-a505ff10-0af5.cloud.databricks.com
+      http_path: /sql/1.0/warehouses/4fa4ca06332da87f
+      token: "{{ env_var('BLUEPRINT_DATABRICKS_TOKEN') }}"
+
+# After (dbt-clickzetta) — 03_lakehouse/profiles.yml
+dbt_blueprint:
   outputs:
     dev:
-      type: databricks
-      host: "{{ env_var('DATABRICKS_HOST') }}"
-      http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
-      token: "{{ env_var('DATABRICKS_TOKEN') }}"
-      catalog: "{{ env_var('DBT_CATALOG', 'hive_metastore') }}"
-      schema: "{{ env_var('DBT_SCHEMA', 'dbt_blueprint_dev') }}"
-      threads: 4
+      type: clickzetta
+      instance: "{{ env_var('CZ_INSTANCE') }}"
+      workspace: "{{ env_var('CZ_WORKSPACE') }}"
+      service: "{{ env_var('CZ_SERVICE') }}"
+      username: "{{ env_var('CZ_USERNAME') }}"
+      password: "{{ env_var('CZ_PASSWORD') }}"
 ```
 
-#### macOS/Linux
+**Everything else — models, macros, tests, data contracts, unit tests — runs unchanged.**
 
-```bash
-export DATABRICKS_HOST="https://<your-workspace-host>"
-export DATABRICKS_HTTP_PATH="/sql/1.0/warehouses/<WAREHOUSE_OR_CLUSTER_HTTP_PATH>"
-export DATABRICKS_TOKEN="dapi<your-token>"
-export DBT_SCHEMA="dbt_blueprint_dev"
-```
+## Additional Changes (syntax compatibility)
 
-#### Windows (Powershell)
+| File | Change | Impact |
+|------|--------|--------|
+| `macros/calculate_age.sql` | `DATEDIFF(year,s,e)+DATEADD` → `YEAR(e)-YEAR(s)-CASE` | Lakehouse compat |
+| `macros/generate_schema_name.sql` | target name `databricks_cluster` → `clickzetta_prod` | Env name |
+| `staging/*.sql` (9 files) | `col :: type` → `CAST(col AS type)` | Databricks cast syntax |
+| `intermediate/int_users.sql` | `getdate()` → `current_date()` | Function name |
+| `semantic/enriched_transactions.sql` | Removed duplicate `payment_source_id` | Bug in original |
 
-```powershell
-$env:DATABRICKS_HOST="https://<your-workspace-host>"
-$env:DATABRICKS_HTTP_PATH="/sql/1.0/warehouses/<WAREHOUSE_OR_CLUSTER_HTTP_PATH>"
-$env:DATABRICKS_TOKEN="dapi<your-token>"
-$env:DBT_SCHEMA="dbt_blueprint_dev"
-```
+`SELECT * EXCEPT (col)` — **no change needed**, supported by both Databricks and Lakehouse.
 
----
+## Verified
 
-## 3. Run dbt (Local)
+Tested on **AWS Singapore** (instance `de1cbb4a`, dbt-clickzetta 1.7.10):
 
-From the repo root:
+| Step | Result |
+|------|--------|
+| `dbt seed` | 9/9 PASS |
+| `dbt run` | 30/30 PASS |
+| `dbt test` | 36/36 PASS |
 
-1. Install packages and load dummy data:
-   ```bash
-   uv run dbt deps
-   uv run dbt seed
-   ```
+## Related
 
-2. Validate connection and config:
-   ```bash
-   uv run dbt debug
-   ```
-
-3. Build models (fast, selective):
-   ```bash
-   uv run dbt run --select state:modified+
-   ```
-
-4. Run tests (contracts & quality):
-   ```bash
-   uv run dbt test
-   ```
-
-> **Tip:** If you change code, `state:modified+` only rebuilds what changed and its dependents.
-
-5. Generate documentation and serve DAG
-   ```bash
-   uv run dbt docs generate
-   uv run dbt docs serve
-   ```
-   ![alt text](image.png)
----
-
-## 4. Project Structure
-
-```plaintext
-dbt-blueprint/
-├─ models/
-│  ├─ sources/            # Source declarations + freshness
-│  ├─ staging/            # Cleaned, contracted staging tables
-│  ├─ intermediate/       # Intermediate layer for transformations
-│  ├─ marts/              # Dims/facts (incremental by default)
-│  └─ semantic/           # Exposures / metrics (optional)
-├─ seeds/                 # Dummy CSVs (users, merchants, payments)
-├─ macros/                # Custom tests/guards, helpers
-├─ selectors.yml          # Run scoping (tags, state:modified+)
-├─ dbt_project.yml
-├─ terraform/             # Optional: Databricks Workflows via IaC
-└─ README.md
-
----
-
-## 5. Docs (Optional, Local Only)
-
-Generate and serve documentation locally:
-
-```bash
-uv run dbt deps
-uv run dbt docs generate
-uv run dbt docs serve
-```
-
-This starts a local docs site (served from `target/`).
+- [Databricks → 云器 Lakehouse 迁移评估系列](https://github.com/clickzetta/Databricks-vs-Lakehouse)
+- Original: [Alex-Teodosiu/dbt-blueprint](https://github.com/Alex-Teodosiu/dbt-blueprint) ⭐72

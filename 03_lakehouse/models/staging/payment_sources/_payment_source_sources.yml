@@ -1,0 +1,35 @@
+version: 2
+
+sources:
+  - name: payment_sources
+    tags: ["payment_sources"]
+    schema: "{{ target.schema }}"
+    tables:
+      - name: account_events
+        description: "Account event data"
+        columns:
+          - name: accountId
+            data_tests:
+              - not_null
+          - name: userId
+          - name: accountType
+          - name: countryCode
+          - name: currencyCode
+          - name: status
+          - name: eventTime
+          - name: recordedTime
+
+      - name: card_events
+        description: "Card event data"
+        columns:
+          - name: cardId
+            data_tests:
+              - not_null
+          - name: userId
+          - name: accountId
+          - name: cardType
+          - name: last4Digits
+          - name: expiryDate
+          - name: status
+          - name: eventTime
+          - name: recordedTime

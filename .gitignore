@@ -2,3 +2,8 @@
 target/
 dbt_packages/
 logs/
+
+.env
+03_lakehouse/target/
+03_lakehouse/dbt_packages/
+03_lakehouse/logs/

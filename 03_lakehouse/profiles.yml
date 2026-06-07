@@ -1,0 +1,18 @@
+# ClickZetta adapter profiles — migrated from dbt-databricks
+# Changes from original:
+#   type: databricks  →  type: clickzetta
+#   catalog/http_path/host  →  instance/workspace/service/vcluster
+#   token  →  username + password
+dbt_blueprint:
+  target: dev
+  outputs:
+    dev:
+      type: clickzetta
+      instance: "{{ env_var('CZ_INSTANCE') }}"
+      workspace: "{{ env_var('CZ_WORKSPACE') }}"
+      schema: "{{ env_var('CZ_SCHEMA', 'dbt_blueprint_dev') }}"
+      vcluster: "{{ env_var('CZ_VCLUSTER', 'DEFAULT') }}"
+      username: "{{ env_var('CZ_USERNAME') }}"
+      password: "{{ env_var('CZ_PASSWORD') }}"
+      service: "{{ env_var('CZ_SERVICE') }}"
+      threads: 4

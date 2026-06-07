@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: users
+    tags: ["users"]
+    schema: "{{ target.schema }}"
+    tables:
+      - name: user_events
+        description: "User event data"
+        columns:
+          - name: userId
+            data_tests:
+              - not_null
+          - name: phoneNumber
+          - name: firstName
+          - name: lastName
+          - name: dateOfBirth
+          - name: address
+          - name: countryCode
+          - name: status
+          - name: eventTime
+          - name: recordedTime
